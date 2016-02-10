@@ -7,5 +7,4 @@ var clearCanvas = function() {
 var animateSprite = function(sprite) {
   clearCanvas();
   ctx.drawImage(sprite.getImg(), sprite.getPosX(), sprite.getPosY());
-  sprite.setPosX(sprite.getPosX() + 5);
 };
