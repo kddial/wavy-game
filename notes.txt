@@ -1,0 +1,6 @@
+
+Texture packer
+- software to create atlases for sprites and world maps
+
+Tiled
+- software for tiling an atlases to layer a map
