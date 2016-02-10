@@ -22,7 +22,7 @@ var actions = {
 var ribbon = new Entity();
 ribbon.setImg("resources/ribbon.png");
 ribbon.setPosX(c_width/2 - 30);
-ribbon.setPosY(c_height/2 - 30);
+// ribbon.setPosY(c_height/2 - 30);
 
 
 
