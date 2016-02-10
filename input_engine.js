@@ -8,7 +8,8 @@
 var bindings = {
   32 : "jump", // space
   38 : "jump", // up arrow
-  "mouse" : "jump" // mouse click
+  "mouse" : "jump", // mouse click
+  "touch" : "jump"
 }
 
 
@@ -28,6 +29,10 @@ var setInputEventListeners = function() {
   // add listening to document because cannot focus on canvas
   document.addEventListener('keydown', onKeyDown);
   document.addEventListener('keyup', onKeyUp);
+
+  // touch events from mobile
+  canvas.addEventListener("touchstart", onTouchDown, false);
+  canvas.addEventListener("touchend", onTouchUp, false);
 }
 
 
@@ -64,4 +69,15 @@ var onKeyUp = function(event) {
     action = bindings[event.keyCode];
     actions[action] = false;
   }
+}
+
+var onTouchDown = function(event) {
+  action = bindings["touch"];
+  actions[action] = true;
+}
+
+
+var onTouchUp = function(event) {
+  action = bindings["touch"];
+  actions[action] = false;
 }
