@@ -4,6 +4,8 @@
 var canvas = null;
 var ctx = null;
 var framerate = 1000/30;
+var c_width = 600;
+var c_height = 800;
 
 /*** Variables used externally ***/
 
@@ -19,6 +21,9 @@ var actions = {
 // Note: used by physics_engine.js
 var ribbon = new Entity();
 ribbon.setImg("resources/ribbon.png");
+ribbon.setPosX(c_width/2 - 30);
+ribbon.setPosY(c_height/2 - 30);
+
 
 
 
@@ -30,8 +35,8 @@ var setup = function() {
   // setup canvas
   canvas = document.getElementById("my_canvas");
   ctx = canvas.getContext('2d');
-  canvas.width = 500;
-  canvas.height = 500;
+  canvas.width = c_width;
+  canvas.height = c_height;
 
   // setup input event listeners
   setInputEventListeners();
@@ -43,7 +48,7 @@ var setup = function() {
   }, framerate);
 
   // stop animation after a few seconds
-  setTimeout(function(){ clearInterval(animation); }, 10000);
+  setTimeout(function(){ clearInterval(animation); }, 60000);
 };
 
 

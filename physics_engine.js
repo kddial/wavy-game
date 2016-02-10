@@ -3,9 +3,9 @@
  */
 
 // Contants
-var jump_dist = -10; // negative means going up
+var jump_dist = -20; // negative means going up
 var gravity_constant = 9.8; // positive means going down
-var gravity_multiplier = 0.01;
+var gravity_multiplier = 0.015;
 var gravity = gravity_constant * gravity_multiplier;
 
 
