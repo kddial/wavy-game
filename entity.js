@@ -99,9 +99,8 @@ function Entity() {
   }
 
   // set image
-  this.setImg = function(src) {
-    this.img = new Image();
-    this.img.src = "resources/ribbon.png";
+  this.setImg = function(img_obj) {
+    this.img = img_obj;
   }
 
 }

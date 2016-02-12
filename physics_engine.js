@@ -31,5 +31,15 @@ var updateRibbonPhysics = function(sprite, actions) {
     sprite.resetVelocity();
   }
 
+};
+
+// Render sprite per frame based on action states
+var updateObstaclesPhysics = function(obstacles_list) {
+
+  for (var i in obstacles_list) {
+    var obs = obstacles_list[i];
+    // only update x position of obstacales (no need to do y axis)
+    obs.incPosX(obs.getVelX());
+  }
 
 };
