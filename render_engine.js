@@ -11,7 +11,10 @@ var animateWorld = function() {
   updateObstaclesPhysics(obstacles_list);
 
   // Check for collision
-  spriteCollisionOccured(ribbon, obstacles_list);
+  if (spriteCollisionOccured(ribbon, obstacles_list)) {
+    console.log("game over");
+    return false;
+  }
 
   // Draw on canvas
   clearCanvas();
@@ -25,6 +28,7 @@ var animateWorld = function() {
 }
 
 
+
 // Clear canvas and draw background
 var clearCanvas = function() {
   ctx.clearRect(0,0,canvas.width, canvas.height);
@@ -34,7 +38,6 @@ var clearCanvas = function() {
 var animateSprite = function(sprite) {
   ctx.drawImage(sprite.getImg(), sprite.getPosX(), sprite.getPosY());
 };
-
 
 // Render obstacles per frame
 var animateObstacles = function(obstacles_list) {
