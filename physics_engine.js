@@ -38,8 +38,38 @@ var updateObstaclesPhysics = function(obstacles_list) {
 
   for (var i in obstacles_list) {
     var obs = obstacles_list[i];
-    // only update x position of obstacales (no need to do y axis)
+    // only update x position of obstacales
     obs.incPosX(obs.getVelX());
+    obs.incPosY(obs.getVelY());
   }
 
 };
+
+
+// Return boolean if a collision occured between two entities
+var collisionOccured = function(entity1, entity2) {
+  if (entity1.getPosX() < entity2.getPosX() + entity2.getWidth() &&
+    entity1.getPosX() + entity1.getWidth() > entity2.getPosX() &&
+    entity1.getPosY() < entity2.getPosY() + entity2.getHeight() &&
+    entity1.getHeight() + entity1.getPosY() > entity2.getPosY()) {
+    // collision detected!
+    return true;
+  } else {
+    // no collision
+    return false;
+  }
+}
+
+
+// Return boolean if a sprite has collided with any obstacle
+var spriteCollisionOccured = function(sprite, obstacles_list) {
+  for (var i in obstacles_list) {
+    var obs = obstacles_list[i];
+
+    if (collisionOccured(sprite, obs)) {
+      console.log("WE HIT BROO");
+      return true;
+    }
+  }
+  return false;
+}

@@ -90,7 +90,6 @@ function Entity() {
     this.vely = 0;
   }
 
-
   // increment velocity x by vel
   this.incVelX = function(vel) {
     this.velx = this.velx + vel;
@@ -100,6 +99,19 @@ function Entity() {
   this.incVelY = function(vel) {
     this.vely = this.vely + vel;
   }
+
+  /* Dimensions */
+
+  // return position x
+  this.getWidth = function() {
+    return this.width;
+  }
+
+  // return position y
+  this.getHeight = function() {
+    return this.height;
+  }
+
 
   /* Image */
 

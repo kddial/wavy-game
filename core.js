@@ -11,24 +11,26 @@ var setup = function() {
 
   // setup input event listeners
   setInputEventListeners();
+};
 
-  // begin animation loop
+// Begin recursive animation loop
+var beginAnimation = function() {
   this.requestAnimationFrame(function() {
     animateWorld();
   } );
-};
+}
 
 
 // Run the game
 var runGame = function() {
   // do everything after images are loaded
   loadAllImages.then(function(result){
-    console.log("yoooooooooo images are loaded")
     setup();
-
     // create entities
     loadRibbon();
     createObstacle("CASIO");
+    
+    beginAnimation();
   });
 }
 

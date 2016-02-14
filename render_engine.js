@@ -10,12 +10,15 @@ var animateWorld = function() {
   updateRibbonPhysics(ribbon, actions);
   updateObstaclesPhysics(obstacles_list);
 
+  // Check for collision
+  spriteCollisionOccured(ribbon, obstacles_list);
+
   // Draw on canvas
   clearCanvas();
   animateSprite(ribbon);
   animateObstacles(obstacles_list);
 
-  // animation loop
+  // recursive animation loop
   this.requestAnimationFrame(function() {
     animateWorld();
   } );
