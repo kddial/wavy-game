@@ -4,8 +4,8 @@
  */
 
  // Obstacle parameters
-var OBST_POSX = c_width;  // right edge of screen
-var OBST_POSY = 80;  // todo: random number generator
+var OBST_POSX = 0;  // not used
+var OBST_POSY = 0;  // not used
 
 var OBST_VELX = -2;  // moving to the left
 var OBST_VELY = 0;  // staying still in y-axis
@@ -17,13 +17,14 @@ var obstacles_list = [];
 
 var createObstacle = function(entityKey) {
   var obst = new Entity();
-  obst.setPosX(OBST_POSX);
-  obst.setPosY(OBST_POSY);
+  obst.setImg(entityKey);
+  
+  obst.setPosX(c_width);
+  obst.setPosY(genRandomNumber(0, (c_height - obst.height)));
+  console.log(obst.getPosY());
 
   obst.setVelX(OBST_VELX);
   obst.setVelY(OBST_VELY);
-  obst.setImg(entityKey);
-  console.log("create obstacle width, height:", obst.width, obst.height);
 
   obstacles_list.push(obst);
 
