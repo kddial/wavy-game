@@ -14,6 +14,11 @@ var animateWorld = function() {
   clearCanvas();
   animateSprite(ribbon);
   animateObstacles(obstacles_list);
+
+  // animation loop
+  this.requestAnimationFrame(function() {
+    animateWorld();
+  } );
 }
 
 

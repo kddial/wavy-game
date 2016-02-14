@@ -1,7 +1,17 @@
+// Entity image map. Sources will be converted to image objects by the getImage function
+var entityImgMap = {
+  "CASIO" : "resources/osbtacles.png",
+  "RIBBON" : "resources/ribbon.png"
+};
+
+
 // Create Entity class
 function Entity() {
   this.posx = 0;
   this.posy = 0;
+
+  this.width = 0;
+  this.height = 0;
 
   this.velx = 0;
   this.vely = 0;
@@ -99,8 +109,40 @@ function Entity() {
   }
 
   // set image
-  this.setImg = function(img_obj) {
-    this.img = img_obj;
+  this.setImg = function(entityKey) {
+    this.img = entityImgMap[entityKey];
+    this.width = this.img.width;
+    this.height = this.img.height;
   }
-
 }
+
+
+// Get image as a promise. Converts image sources to image objects in entityImgMap
+var getImage = function(entity){
+  return new Promise(function(resolve, reject){
+    var img = new Image()
+    img.onload = function(){
+      // replace source url with image object
+      entityImgMap[entity] = img;
+      resolve(img)
+    }
+    img.onerror = function(){
+      reject(img)
+    }
+    img.src = entityImgMap[entity];
+  })
+};
+
+// Load all entity images
+var loadAllImages = new Promise(function(resolve, reject){
+  var entities = Object.keys(entityImgMap);
+  var entityPromises = entities.map(getImage) // call getImage on each array element and return array of promises
+  Promise.all(entityPromises).then(function(images){
+    // all images have been loaded, do something with each image (ignored)
+    // for (var i=0; i<images.length; i++){
+    // }
+    resolve();
+  }).catch(function(urls){
+    console.log("Error fetching some images: " + urls)
+  })
+});

@@ -12,21 +12,26 @@ var setup = function() {
   // setup input event listeners
   setInputEventListeners();
 
-
-  // setup obstacles in world
-  createObstacle()
-
-
-  // begin animation
-  animation = setInterval(function(){
+  // begin animation loop
+  this.requestAnimationFrame(function() {
     animateWorld();
-  }, framerate);
-
-
-
-  // stop animation after a few seconds
-  setTimeout(function(){ clearInterval(animation); }, 60000);
+  } );
 };
 
-// run game
-setup();
+
+// Run the game
+var runGame = function() {
+  // do everything after images are loaded
+  loadAllImages.then(function(result){
+    console.log("yoooooooooo images are loaded")
+    setup();
+
+    // create entities
+    loadRibbon();
+    createObstacle("CASIO");
+  });
+}
+
+
+// Let it rip!
+runGame();
