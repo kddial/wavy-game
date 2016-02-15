@@ -126,6 +126,15 @@ function Entity() {
     this.width = this.img.width;
     this.height = this.img.height;
   }
+
+  // reset entity's position and velocity
+  this.reset = function() {
+    this.posx = 0;
+    this.posy = 0;
+
+    this.velx = 0;
+    this.vely = 0;
+  }
 }
 
 

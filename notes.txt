@@ -12,3 +12,8 @@ collision detection:
 
 javascript Promises example:
 - http://www.javascriptkit.com/javatutors/javascriptpromises.shtml
+
+canvas full size on mobile html5
+- google "how to make html5 mobile height always show"
+- http://stackoverflow.com/questions/4288253/html5-canvas-100-width-height-of-viewport
+- canvas size ratio - http://stackoverflow.com/questions/1664785/resize-html5-canvas-to-fit-window

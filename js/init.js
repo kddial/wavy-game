@@ -3,7 +3,7 @@
 var canvas = null;
 var ctx = null;
 var framerate = 1000/60;
-var c_width = 400;
+var c_width = 600;
 var c_height = 800;
 
 /*** Variables used externally ***/

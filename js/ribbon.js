@@ -8,4 +8,9 @@ var ribbon = new Entity();
 var loadRibbon = function() {
   ribbon.setImg("RIBBON");
   ribbon.setPosX(c_width/2 - 30);
-}
+};
+
+var resetRibbon = function() {
+  ribbon.reset();
+  ribbon.setPosX(c_width/2 - 30);
+};
