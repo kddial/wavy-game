@@ -1,7 +1,7 @@
 // Entity image map. Sources will be converted to image objects by the getImage function
 var entityImgMap = {
   "CASIO" : "resources/osbtacles.png",
-  "RIBBON" : "resources/ribbon.png"
+  "RIBBON" : "resources/yeezy.png"
 };
 
 
