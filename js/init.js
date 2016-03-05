@@ -28,7 +28,7 @@ var MAX_NUMBER_OF_OBSTACLES = 4; // max number of obstacles on screen at a time 
 var OBST_POSX = 0;  // not used
 var OBST_POSY = 0;  // not used
 
-var OBST_VELX = -10;  // moving to the left
+var OBST_VELX = -8;  // moving to the left
 var OBST_VELY = 0;  // staying still in y-axis
 
 
