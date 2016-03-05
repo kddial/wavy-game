@@ -10,7 +10,11 @@ var animateWorld = function(frame) {
   if (frame % OBSTACLE_PER_FRAMES == 0) {
     console.log(frame % OBSTACLE_PER_FRAMES);
     createObstacle("CASIO");
-    createObstacle("CASIO");
+
+    if (obstacles_list.length > MAX_NUMBER_OF_OBSTACLES) {
+      removeFirstObstacle();
+    }
+
   }
 
   // Update physics

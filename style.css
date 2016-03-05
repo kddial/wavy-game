@@ -4,3 +4,7 @@ canvas {
   display: block;
   -webkit-tap-highlight-color: transparent;
 }
+
+body {
+	background-color: black;
+}

@@ -5,7 +5,7 @@ var canvas = null;
 var ctx = null;
 var framerate = 1000/60;
 var c_width = 600;
-var c_height = 800;
+var c_height = 700;
 
 // Physics engine contants
 var jump_dist = -15; // negative means going up
@@ -23,11 +23,12 @@ var entityImgMap = {
 
 
 // Obstacle parameters
-var OBSTACLE_PER_FRAMES = 40; // a new obstacle is created per X frames
+var OBSTACLE_PER_FRAMES = 28; // a new obstacle is created per X frames
+var MAX_NUMBER_OF_OBSTACLES = 4; // max number of obstacles on screen at a time (to save computation for collision detection)
 var OBST_POSX = 0;  // not used
 var OBST_POSY = 0;  // not used
 
-var OBST_VELX = -6;  // moving to the left
+var OBST_VELX = -10;  // moving to the left
 var OBST_VELY = 0;  // staying still in y-axis
 
 
