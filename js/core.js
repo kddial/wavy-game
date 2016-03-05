@@ -24,7 +24,7 @@ var resizeCanvas = function() {
   var width;
   var height;
   var x_padding = 20;
-  var y_padding = 20;
+  var y_padding = 110;
   var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
   var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
 
