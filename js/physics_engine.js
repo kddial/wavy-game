@@ -2,13 +2,6 @@
  * Control the velocity of the ribbon
  */
 
-// Contants
-var jump_dist = -15; // negative means going up
-var gravity_constant = 9.8; // positive means going down
-var gravity_multiplier = 0.05;
-var gravity = gravity_constant * gravity_multiplier;
-
-
 
 // Render sprite per frame based on action states
 var updateRibbonPhysics = function(sprite, actions) {
@@ -72,4 +65,21 @@ var spriteCollisionOccured = function(sprite, obstacles_list) {
     }
   }
   return false;
+}
+
+
+var spriteOutOfBounds = function(sprite) {
+
+  if (sprite.getPosY() < -30) {
+    // above bounds
+    return true;
+
+  } else if (sprite.getPosY() + sprite.getHeight() > (c_height + 30)) {
+    // below bounds
+    return true;
+
+  } else {
+    // no collision
+    return false;
+  }
 }

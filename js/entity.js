@@ -1,9 +1,3 @@
-// Entity image map. Sources will be converted to image objects by the getImage function
-var entityImgMap = {
-  "CASIO" : "resources/osbtacles.png",
-  "RIBBON" : "resources/yeezy.png"
-};
-
 
 // Create Entity class
 function Entity() {
@@ -101,6 +95,17 @@ function Entity() {
   }
 
   /* Dimensions */
+
+  // return position x
+  this.setWidth = function(size) {
+    this.width = size;
+  }
+
+  // return position y
+  this.setHeight = function(size) {
+    this.height = size;
+  }
+
 
   // return position x
   this.getWidth = function() {

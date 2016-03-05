@@ -3,13 +3,6 @@
  * Dependancies: entity
  */
 
- // Obstacle parameters
-var OBST_POSX = 0;  // not used
-var OBST_POSY = 0;  // not used
-
-var OBST_VELX = -2;  // moving to the left
-var OBST_VELY = 0;  // staying still in y-axis
-
 // list of all obstacles
 // Obstacles outside off map will need to be popped off list to reduce computational time
 var obstacles_list = [];

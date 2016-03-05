@@ -45,7 +45,7 @@ var resizeCanvas = function() {
 // Begin recursive animation loop
 var beginAnimation = function() {
   this.requestAnimationFrame(function() {
-    animateWorld();
+    animateWorld(0);
   } );
 }
 
@@ -55,9 +55,9 @@ var runGame = function() {
   // do everything after images are loaded
   loadAllImages.then(function(result){
     setup();
-    // create entities
+
+    // create ribbon
     loadRibbon();
-    createObstacle("CASIO");
 
     beginAnimation();
   });
