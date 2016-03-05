@@ -8,7 +8,6 @@ var animateWorld = function(frame) {
 
   // Create object on every OBSTACLE_PER_FRAMES frame
   if (frame % OBSTACLE_PER_FRAMES == 0) {
-    console.log(frame % OBSTACLE_PER_FRAMES);
     createObstacle("CASIO");
 
     if (obstacles_list.length > MAX_NUMBER_OF_OBSTACLES) {
@@ -24,7 +23,13 @@ var animateWorld = function(frame) {
   // Check for collision
   if (spriteOutOfBounds(ribbon) || spriteCollisionOccured(ribbon, obstacles_list)) {
 
-    console.log("game will reset soon");
+    // display score
+    console.log("Score: " + frame);
+
+    var div = document.getElementById('score');
+    div.innerHTML = frame;
+
+
     setTimeout(function(){
       resetGame();
       animateWorld(0);

@@ -60,7 +60,6 @@ var spriteCollisionOccured = function(sprite, obstacles_list) {
     var obs = obstacles_list[i];
 
     if (collisionOccured(sprite, obs)) {
-      console.log("WE HIT BROO");
       return true;
     }
   }
