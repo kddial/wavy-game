@@ -33,6 +33,9 @@ var animateWorld = function(frame) {
   animateSprite(ribbon);
   animateObstacles(obstacles_list);
 
+  // Continously display score
+  displayScore(frame);
+
   // recursive animation loop
   this.requestAnimationFrame(function() {
     // increment frame number
@@ -72,13 +75,9 @@ var resetGame = function() {
 // Actions to do once collision occurs
 var gameOver = function(frame) {
 
-  // display score
-  frameScore = getScoreRoundedByFactor(frame);
-  var scoreDiv = document.getElementById('score');
-  var topScoreDiv = document.getElementById('topScore');
-  scoreDiv.innerHTML = frameScore;
-
   // set top score
+  frameScore = getScoreRoundedByFactor(frame);
+  var topScoreDiv = document.getElementById('topScore');
   var topScoreVal = Number(topScoreDiv.innerHTML);
   if (frameScore > topScoreVal) {
     topScoreDiv.innerHTML = frameScore;
@@ -90,3 +89,9 @@ var gameOver = function(frame) {
 
 }
 
+var displayScore = function(frame) {
+  // display score
+  frameScore = getScoreRoundedByFactor(frame);
+  var scoreDiv = document.getElementById('score');
+  scoreDiv.innerHTML = frameScore;
+}

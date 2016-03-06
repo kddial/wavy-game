@@ -10,7 +10,7 @@ var genRandomNumber = function(minimum, maximum) {
 
 
 var getScoreRoundedByFactor = function(score) {
-  var factor = 1000
+  var factor = 100
   var final = ~~(score / factor);
 
   var remainder = score % factor;
