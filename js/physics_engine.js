@@ -4,10 +4,10 @@
 
 
 // Render sprite per frame based on action states
-var updateRibbonPhysics = function(sprite, actions) {
+var updateRibbonPhysics = function(sprite, actions_state) {
 
   // set velocity
-  if (actions["jump"]) {
+  if (actions_state["jump"]) {
     sprite.setVelY(jump_dist);
   } else {
     // neutral state (free falling)
@@ -20,7 +20,7 @@ var updateRibbonPhysics = function(sprite, actions) {
   // Post velocity calculation
   // after making a jump, the sprite should start falling down due to
   // gravity. thus we need to set the velocity to zero.
-  if (actions["jump"]) {
+  if (actions_state["jump"]) {
     sprite.resetVelocity();
   }
 

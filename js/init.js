@@ -8,7 +8,7 @@ var c_width = 1000;
 var c_height = 700;
 
 // Physics engine contants
-var jump_dist = -2; // negative means going up
+var jump_dist = -3; // negative means going up
 var gravity_constant = 9.8; // positive means going down
 var gravity_multiplier = 0.07;
 var gravity = gravity_constant * gravity_multiplier;
@@ -21,6 +21,9 @@ var entityImgMap = {
   "RIBBON" : "resources/cube.png"
 };
 
+// Ribbon parameters
+var RIBBON_INIT_POS_X = 150;
+var RIBBON_INIT_POS_Y = 50;
 
 // Obstacle parameters
 var OBSTACLE_PER_FRAMES = 50; // a new obstacle is created per X frames
@@ -36,9 +39,16 @@ var OBST_VELY = 0;  // staying still in y-axis
 
 var GAME_OVER = false;
 var GAME_OVER_TIME = 2000;
+
+
+// Game states, either START, GAME, or GAME OVER
+var START_S = 0;
+var GAME_S = 1;
+var GAME_OVER_S = 2;
+var game_state = START_S
+
 // Action states of the game. if an action is being performed, then it is true.
-// if all values are false, then the game is in neutral state
 // Note: used by input_engine.js, physics_engine.js
-var actions = {
+var actions_state = {
   "jump" : false
 };

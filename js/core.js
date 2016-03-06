@@ -1,7 +1,7 @@
 /*** Core functionality to setup game ***/
 
 // Setup game
-var setup = function() {
+var setup = function(startGameFunction) {
 
   // setup canvas
   canvas = document.getElementById("my_canvas");
@@ -14,7 +14,7 @@ var setup = function() {
   window.addEventListener("resize", resizeCanvas);
 
   // setup input event listeners
-  setInputEventListeners();
+  setInputEventListeners(startGameFunction);
 };
 
 
@@ -38,7 +38,6 @@ var resizeCanvas = function() {
     height = Math.min(canvas.height - y_padding, h - y_padding);
     width = height / canvasRatio;
   }
-  console.log("width: " + width + ", height: " + height);
   canvas.style.width =  width + "px";
   canvas.style.height = height + "px";
 };
@@ -56,12 +55,11 @@ var beginAnimation = function() {
 var runGame = function() {
   // do everything after images are loaded
   loadAllImages.then(function(result){
-    setup();
+    setup(beginAnimation);
 
     // create ribbon
     loadRibbon();
 
-    beginAnimation();
   });
 }
 

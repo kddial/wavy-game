@@ -19,65 +19,121 @@ var mouse = {
   y : 0
 };
 
-
-var setInputEventListeners = function() {
+var setInputEventListeners = function(startGameFunction) {
   // set event listerners
-  canvas.addEventListener('mousemove', onMouseMove);
-  canvas.addEventListener('mousedown', onMouseDown);
-  canvas.addEventListener('mouseup', onMouseUp);
+  canvas.addEventListener('mousemove', function(event){ onMouseMove(event,startGameFunction); });
+  canvas.addEventListener('mousedown', function(event){ onMouseDown(event,startGameFunction); });
+  canvas.addEventListener('mouseup', function(event){ onMouseUp(event,startGameFunction); });
 
   // add listening to document because cannot focus on canvas
-  document.addEventListener('keydown', onKeyDown);
-  document.addEventListener('keyup', onKeyUp);
+  document.addEventListener('keydown', function(event){ onKeyDown(event,startGameFunction); });
+  document.addEventListener('keyup', function(event){ onKeyUp(event,startGameFunction); });
 
   // touch events from mobile
-  canvas.addEventListener("touchstart", onTouchDown, false);
-  canvas.addEventListener("touchend", onTouchUp, false);
+  canvas.addEventListener("touchstart", function(event){ onTouchDown(event,startGameFunction); }, false);
+  canvas.addEventListener("touchend", function(event){ onTouchUp(event,startGameFunction); }, false);
 }
 
-
-var onMouseMove = function(event) {
+// dont really need this
+var onMouseMove = function(event, startGameFunction) {
   mouse.x = event.clientX;
   mouse.y = event.clientY;
 }
 
 
-var onMouseDown = function(event) {
-  action = bindings["mouse"];
-  actions[action] = true;
+var onMouseDown = function(event, startGameFunction) {
+  if (game_state == GAME_S) {
+    action = bindings["mouse"];
+    actions_state[action] = true;
+  }
 }
 
 
-var onMouseUp = function(event) {
-  action = bindings["mouse"];
-  actions[action] = false;
+var onMouseUp = function(event, startGameFunction) {
+  if (game_state == START_S) {
+    actionsToDoOnStartState(startGameFunction);
+
+  } else if (game_state == GAME_OVER_S) {
+    actionsToDoOnGameOverState(startGameFunction);
+
+  } else if (game_state == GAME_S) {
+    action = bindings["mouse"];
+    actions_state[action] = false;
+  }
 }
 
 
-var onKeyDown = function(event) {
+var onKeyDown = function(event, startGameFunction) {
   // check if key belongs to bindings and perform the action
   if (bindings[event.keyCode]) {
-    action = bindings[event.keyCode];
-    actions[action] = true;
+    if (game_state == GAME_S) {
+      action = bindings[event.keyCode];
+      actions_state[action] = true;
+    }
   }
 }
 
 
-var onKeyUp = function(event) {
+var onKeyUp = function(event, startGameFunction) {
   // check if key belongs to bindings and stop the action
   if (bindings[event.keyCode]) {
-    action = bindings[event.keyCode];
-    actions[action] = false;
+    if (game_state == START_S) {
+      actionsToDoOnStartState(startGameFunction);
+
+    } else if (game_state == GAME_OVER_S) {
+      actionsToDoOnGameOverState(startGameFunction);
+
+    } else if (game_state == GAME_S) {
+      action = bindings[event.keyCode];
+      actions_state[action] = false;
+    }
   }
 }
 
-var onTouchDown = function(event) {
-  action = bindings["touch"];
-  actions[action] = true;
+
+var onTouchDown = function(event, startGameFunction) {
+  if (game_state == GAME_S) {
+    action = bindings["touch"];
+    actions_state[action] = true;
+  }
 }
 
 
-var onTouchUp = function(event) {
-  action = bindings["touch"];
-  actions[action] = false;
+var onTouchUp = function(event, startGameFunction) {
+  if (game_state == START_S) {
+    actionsToDoOnStartState(startGameFunction);
+
+  } else if (game_state == GAME_OVER_S) {
+    actionsToDoOnGameOverState(startGameFunction);
+
+  } else if (game_state == GAME_S) {
+    action = bindings["touch"];
+    actions_state[action] = false;
+  }
+}
+
+var actionsToDoOnStartState = function(startGameFunction) {
+
+  if (actions_state["jump"]) {
+    // this prevents moving from game over screen to starting game, when dieing while holding a key down
+    // when you die while holding a key down, the key up will start the new game (we need to prevent this)
+    // reset action states
+    actions_state["jump"] = false;
+  } else {
+    // start the game
+    game_state = GAME_S;
+    startGameFunction();
+  }
+}
+
+var actionsToDoOnGameOverState = function(startGameFunction) {
+
+  if (actions_state["jump"]) {
+    // reset action states
+    actions_state["jump"] = false;
+  } else {
+    // start game over again
+    game_state = GAME_S;
+    startGameFunction();
+  }
 }
