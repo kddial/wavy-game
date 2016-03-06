@@ -8,7 +8,7 @@ var updateRibbonPhysics = function(sprite, actions_state) {
 
   // set velocity
   if (actions_state["jump"]) {
-    sprite.setVelY(jump_dist);
+    sprite.incVelY(jump_dist);
   } else {
     // neutral state (free falling)
     sprite.incVelY(gravity);
@@ -20,8 +20,9 @@ var updateRibbonPhysics = function(sprite, actions_state) {
   // Post velocity calculation
   // after making a jump, the sprite should start falling down due to
   // gravity. thus we need to set the velocity to zero.
+  // might be used for max speed
   if (actions_state["jump"]) {
-    sprite.resetVelocity();
+    // sprite.resetVelocity();
   }
 
 };
