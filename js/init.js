@@ -8,9 +8,9 @@ var c_width = 1000;
 var c_height = 700;
 
 // Physics engine contants
-var jump_dist = -0.6; // negative means going up
+var jump_dist = -0.5; // negative means going up
 var gravity_constant = 9.8; // positive means going down
-var gravity_multiplier = 0.07;
+var gravity_multiplier = 0.05;
 var gravity = gravity_constant * gravity_multiplier;
 
 
