@@ -1,1 +1,1 @@
-# html5-ribbon
+# Wavy Game
