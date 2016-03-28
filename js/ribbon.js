@@ -7,15 +7,13 @@ var ribbon = new Entity();
 
 var loadRibbon = function() {
   ribbon.setImg("RIBBON");
-  ribbon.setWidth(ribbon.getWidth() - 15) // specific to cube
-  ribbon.setPosX(getInitPosXRibbon());
+  ribbon.setWidth(ribbon.getWidth() - 15) // specific to cube bounding box
+  ribbon.setPosX(RIBBON_INIT_POS_X);
+  ribbon.setPosY(RIBBON_INIT_POS_Y);
 };
 
 var resetRibbon = function() {
   ribbon.reset();
-  ribbon.setPosX(getInitPosXRibbon());
-};
-
-var getInitPosXRibbon = function() {
-  return 100;
+  ribbon.setPosX(RIBBON_INIT_POS_X);
+  ribbon.setPosY(RIBBON_INIT_POS_Y);
 };

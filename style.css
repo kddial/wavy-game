@@ -18,7 +18,7 @@ body {
 	/* Rules below not implemented in browsers yet */
 	-o-user-select: none;
 	user-select: none;
-	color: white;
+	color: #EFDFDF;
 	font-size: 3.0vh;
 }
 

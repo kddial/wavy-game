@@ -1,3 +1,10 @@
+Notes from nick:
+- make the flying more curve instead of linear (acceleration)
+- probably with a max speed
+- the difficulty is not increasing as game goes on
+- what do the hearts mean? 
+
+
 
 Texture packer
 - software to create atlases for sprites and world maps

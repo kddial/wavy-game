@@ -17,23 +17,13 @@ var animateWorld = function(frame) {
   }
 
   // Update physics
-  updateRibbonPhysics(ribbon, actions);
+  updateRibbonPhysics(ribbon, actions_state);
   updateObstaclesPhysics(obstacles_list);
 
   // Check for collision
   if (spriteOutOfBounds(ribbon) || spriteCollisionOccured(ribbon, obstacles_list)) {
 
-    // display score
-    console.log("Score: " + frame);
-
-    var div = document.getElementById('score');
-    div.innerHTML = frame;
-
-
-    setTimeout(function(){
-      resetGame();
-      animateWorld(0);
-    }, GAME_OVER_TIME);
+    gameOver(frame);
 
     return false;
   }
@@ -42,6 +32,9 @@ var animateWorld = function(frame) {
   clearCanvas();
   animateSprite(ribbon);
   animateObstacles(obstacles_list);
+
+  // Continously display score
+  displayScore(frame);
 
   // recursive animation loop
   this.requestAnimationFrame(function() {
@@ -73,9 +66,32 @@ var animateObstacles = function(obstacles_list) {
 
 // Reset game by reseting sprite position and clearing obstacle list
 var resetGame = function() {
-  
+
   // garbage collector will delete previous objects (hopefully)
   obstacles_list = [];
   resetRibbon();
 }
 
+// Actions to do once collision occurs
+var gameOver = function(frame) {
+
+  // set top score
+  frameScore = getScoreRoundedByFactor(frame);
+  var topScoreDiv = document.getElementById('topScore');
+  var topScoreVal = Number(topScoreDiv.innerHTML);
+  if (frameScore > topScoreVal) {
+    topScoreDiv.innerHTML = frameScore;
+  }
+
+  // change state to game over
+  resetGame();
+  game_state = GAME_OVER_S;
+
+}
+
+var displayScore = function(frame) {
+  // display score
+  frameScore = getScoreRoundedByFactor(frame);
+  var scoreDiv = document.getElementById('score');
+  scoreDiv.innerHTML = frameScore;
+}
