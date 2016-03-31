@@ -1,7 +1,7 @@
 /*** Core functionality to setup game ***/
 
 // Setup game
-var setup = function(startGameFunction) {
+var setup = function(startGameFunction, gameOverFunction) {
 
   // setup canvas
   canvas = document.getElementById("my_canvas");
@@ -14,9 +14,26 @@ var setup = function(startGameFunction) {
   window.addEventListener("resize", resizeCanvas);
 
   // setup input event listeners
-  setInputEventListeners(startGameFunction);
+  setInputEventListeners(startGameFunction, gameOverFunction);
 };
 
+var loadStartScreen = function() {
+  clearCanvas();
+  // display static ribbon on start
+  drawText(start_text1, 260, 70, null)
+  drawSmallText(start_text2, 260, 120, null)
+  animateSprite(ribbon);
+}
+
+var gameOverFunction = function(){
+
+  // stop game over spam
+  if (drawGameOverRepeatInterval) {
+    clearInterval(drawGameOverRepeatInterval);
+  }
+
+  loadStartScreen();
+}
 
 // Resize canvas based on viewport size
 var resizeCanvas = function() {
@@ -55,10 +72,11 @@ var beginAnimation = function() {
 var runGame = function() {
   // do everything after images are loaded
   loadAllImages.then(function(result){
-    setup(beginAnimation);
+    setup(beginAnimation, gameOverFunction);
 
     // create ribbon
     loadRibbon();
+    loadStartScreen();
 
   });
 }

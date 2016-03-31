@@ -63,6 +63,38 @@ var animateObstacles = function(obstacles_list) {
   }
 };
 
+// Draw text on canvas
+var drawText = function(text, posx, posy, color) {
+  drawTextColorSize(text, posx, posy, color, 30);
+};
+
+var drawSmallText = function(text, posx, posy, color) {
+  drawTextColorSize(text, posx, posy, color, 22);
+};
+
+// Draw text on canvas
+var drawLargeText = function(text, posx, posy, color) {
+  drawTextColorSize(text, posx, posy, color, 60);
+};
+
+// Draw text on canvas
+var drawExtraLargeText = function(text, posx, posy, color) {
+  drawTextColorSize(text, posx, posy, color, 80);
+};
+
+
+// example color is "rgba(255,165,0,1)": string
+// example size is 80: int
+var drawTextColorSize = function(text, posx, posy, color, size) {
+  if (color) {
+    ctx.fillStyle = color;
+  } else {
+    ctx.fillStyle = "rgba(0,0,0,1)" // black
+  }
+  ctx.font = size + 'px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif';
+  ctx.fillText(text, posx, posy);
+}
+
 
 // Reset game by reseting sprite position and clearing obstacle list
 var resetGame = function() {
@@ -87,6 +119,50 @@ var gameOver = function(frame) {
   resetGame();
   game_state = GAME_OVER_S;
 
+  // display game over text
+  drawExtraLargeText(game_over_text1, 285, 250, null);
+  drawText(game_over_text2, 295, 300, null);
+
+  // spam game over text
+  drawGameOverSpamAttack();
+}
+
+
+var drawGameOverSpamAttack = function() {
+  // spam the shit out of game over text
+  setTimeout(function() {
+    gameOverSpamColor = 0;
+    gameOverSpamColorIncrease = true;
+
+    drawGameOverRepeatInterval = setInterval(function(x){ 
+
+      // increase color until 255, then decrease to 0
+      if (gameOverSpamColorIncrease) {
+        if (gameOverSpamColor < 255) {
+          gameOverSpamColor += 2;
+        } else {
+          gameOverSpamColorIncrease = false;
+        }
+      } else {
+        if (gameOverSpamColor > 0) {
+          gameOverSpamColor--;
+        } else {
+          gameOverSpamColorIncrease = true;
+        }
+      }
+
+      drawGameOverRandom(gameOverSpamColor); 
+      }, 100); // spanning at every x milliseconds
+  }, 400); // after x time, then start spamming
+}
+
+var drawGameOverRandom = function(color_val) {
+  var x = genRandomNumber(-200, c_width-200)
+  var y = genRandomNumber(-100, c_height)
+  var color = "rgba(" +color_val+ "," +color_val+ "," +color_val+ ",1)"
+
+  drawExtraLargeText(game_over_text1, x, y, color);
+  drawText(game_over_text2, x+10, y+50, color);
 }
 
 var displayScore = function(frame) {
