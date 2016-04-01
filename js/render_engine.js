@@ -136,22 +136,27 @@ var drawGameOverSpamAttack = function() {
 
     drawGameOverRepeatInterval = setInterval(function(x){
 
-      // increase color until 255, then decrease to 0
-      if (gameOverSpamColorIncrease) {
-        if (gameOverSpamColor < 255) {
-          gameOverSpamColor++;
-        } else {
-          gameOverSpamColorIncrease = false;
-        }
+      if (game_state != GAME_OVER_S) {
+        clearInterval(drawGameOverRepeatInterval);
       } else {
-        if (gameOverSpamColor > 0) {
-          gameOverSpamColor--;
+
+        // increase color until 255, then decrease to 0
+        if (gameOverSpamColorIncrease) {
+          if (gameOverSpamColor < 255) {
+            gameOverSpamColor++;
+          } else {
+            gameOverSpamColorIncrease = false;
+          }
         } else {
-          gameOverSpamColorIncrease = true;
+          if (gameOverSpamColor > 0) {
+            gameOverSpamColor--;
+          } else {
+            gameOverSpamColorIncrease = true;
+          }
         }
+        drawGameOverRandom(gameOverSpamColor); 
       }
 
-      drawGameOverRandom(gameOverSpamColor); 
       }, 60); // spanning at every x milliseconds
   }, 300); // after x time, then start spamming
 }

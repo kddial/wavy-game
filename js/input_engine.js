@@ -9,7 +9,7 @@ var bindings = {
   32 : "jump", // space
   38 : "jump", // up arrow
   "mouse" : "jump", // mouse click
-  "touch" : "jump"
+  "touch" : "jump" // mobile touch
 }
 
 
@@ -30,8 +30,8 @@ var setInputEventListeners = function(startGameFunction, gameOverFunction) {
   document.addEventListener('keyup', function(event){ onKeyUp(event,startGameFunction, gameOverFunction); });
 
   // touch events from mobile
-  canvas.addEventListener("touchstart", function(event){ onTouchDown(event,startGameFunction, gameOverFunction); }, false);
-  canvas.addEventListener("touchend", function(event){ onTouchUp(event,startGameFunction, gameOverFunction); }, false);
+  canvas.addEventListener("touchstart", function(event){ onTouchDown(event,startGameFunction, gameOverFunction); });
+  canvas.addEventListener("touchend", function(event){ onTouchUp(event,startGameFunction, gameOverFunction); });
 }
 
 // dont really need this
@@ -92,6 +92,7 @@ var onKeyUp = function(event, startGameFunction, gameOverFunction) {
 
 
 var onTouchDown = function(event, startGameFunction, gameOverFunction) {
+  event.preventDefault();
   if (game_state == GAME_S) {
     action = bindings["touch"];
     actions_state[action] = true;
@@ -100,6 +101,7 @@ var onTouchDown = function(event, startGameFunction, gameOverFunction) {
 
 
 var onTouchUp = function(event, startGameFunction, gameOverFunction) {
+  event.preventDefault();
   if (game_state == START_S) {
     actionsToDoOnStartState(startGameFunction);
 
