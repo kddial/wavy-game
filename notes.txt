@@ -1,3 +1,6 @@
+Backlog:
+https://docs.google.com/document/d/15thIgkFYG1u6mk17pFRk3S-LhSvulBhv-sAcYDfcYIc/edit
+
 Notes from nick:
 - make the flying more curve instead of linear (acceleration)
 - probably with a max speed
