@@ -61,8 +61,6 @@ var spriteCollisionOccured = function(sprite, obstacles_list) {
     var obs = obstacles_list[i];
 
     if (collisionOccured(sprite, obs)) {
-      ribbonImageData = ctx.getImageData(0,0, sprite.getWidth(), sprite.getHeight());
-      debugger;
       return true;
     }
   }

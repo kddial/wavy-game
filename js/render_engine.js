@@ -124,7 +124,7 @@ var gameOver = function(frame) {
   drawText(game_over_text2, 295, 300, null);
 
   // spam game over text
-  drawGameOverSpamAttack();
+  // drawGameOverSpamAttack();
 }
 
 
