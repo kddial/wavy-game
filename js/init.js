@@ -52,3 +52,14 @@ var game_state = START_S
 var actions_state = {
   "jump" : false
 };
+
+// start and game over strings
+var start_text1 = "Tap and HOLD";
+var start_text2 = "Can use Mouse, Touchpad, Spacebar, or Up arrow";
+var game_over_text1 = "GAME  OVER";
+var game_over_text2 = "Tap to restart";
+
+// game over spam interval 
+var drawGameOverRepeatInterval = null;
+var gameOverSpamColor = 0;
+var gameOverSpamColorIncrease = true;

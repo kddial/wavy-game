@@ -1,7 +1,7 @@
 /*** Core functionality to setup game ***/
 
 // Setup game
-var setup = function(startGameFunction) {
+var setup = function(startGameFunction, gameOverFunction) {
 
   // setup canvas
   canvas = document.getElementById("my_canvas");
@@ -14,9 +14,26 @@ var setup = function(startGameFunction) {
   window.addEventListener("resize", resizeCanvas);
 
   // setup input event listeners
-  setInputEventListeners(startGameFunction);
+  setInputEventListeners(startGameFunction, gameOverFunction);
 };
 
+var loadStartScreen = function() {
+  clearCanvas();
+  // display static ribbon on start
+  drawText(start_text1, 260, 70, null)
+  drawSmallText(start_text2, 260, 120, null)
+  animateSprite(ribbon);
+}
+
+var gameOverFunction = function(){
+
+  // stop game over spam
+  if (drawGameOverRepeatInterval) {
+    clearInterval(drawGameOverRepeatInterval);
+  }
+
+  loadStartScreen();
+}
 
 // Resize canvas based on viewport size
 var resizeCanvas = function() {
@@ -24,17 +41,23 @@ var resizeCanvas = function() {
   var width;
   var height;
   var x_padding = 20;
-  var y_padding = 120;
+  var y_padding = 50;
   var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
   var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
 
-  // when canvas rectangle's width is larger than the height bigger than width
-  // if in potrait view, match canvas width to viewport width, leaving white space on top and bottom
-  // if in landscape view, match canvas height to viewport height, leaving whitespace on the sides
-  if (h >= w) {
+  // if window width:height ratio is less than the games ratio, put it in portrait mode
+  // for example, canvas is 1000:700=1.4
+  // if window size is 1200:500=2.4, switch to landscape
+  // if window size is 800:500=1.33, switch to potrait, because 1.33 < 1.4
+  var canvasRatioPadded = (canvas.width + x_padding) / (canvas.height + y_padding)
+  var windowRatio = w / h
+
+  if (windowRatio < canvasRatioPadded) {
+    // potrait
     width =  Math.min(canvas.width - x_padding, w - x_padding);
     height = width * canvasRatio;
   } else {
+    // landscape
     height = Math.min(canvas.height - y_padding, h - y_padding);
     width = height / canvasRatio;
   }
@@ -55,10 +78,11 @@ var beginAnimation = function() {
 var runGame = function() {
   // do everything after images are loaded
   loadAllImages.then(function(result){
-    setup(beginAnimation);
+    setup(beginAnimation, gameOverFunction);
 
     // create ribbon
     loadRibbon();
+    loadStartScreen();
 
   });
 }
